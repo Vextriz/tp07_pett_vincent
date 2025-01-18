@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Boutique</a>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item" *ngIf="!isAuthenticated">
+      <a class="nav-link" routerLink="/login">Connexion</a>
+    </li>
+    <li class="nav-item" *ngIf="!isAuthenticated">
+      <a class="nav-link" routerLink="/register">Inscription</a>
+    </li>
+    <li class="nav-item" *ngIf="isAuthenticated">
+      <a class="nav-link" routerLink="/shoppingBag">Voir le Panier</a>
+    </li>
+    <li class="nav-item" *ngIf="isAuthenticated">
+      <a class="nav-link" routerLink="/products">Catalogue</a>
+    </li>
+    <li class="nav-item" *ngIf="isAuthenticated">
+      <a class="nav-link" (click)="logout()">Déconnexion</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container mt-3">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,38 @@
+<div class="container mt-3">
+  <h1>Catalogue</h1>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Catégorie</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.titre }}</td>
+        <td>{{ product.categorie }}</td>
+        <td>{{ product.prix | currency }}</td>
+        <td>{{ getProductQuantity(product.id) }}</td>
+        <td>
+          <button
+            class="btn btn-success btn-sm"
+            [disabled]="isLoading[product.id]"
+            (click)="addProductToUser(product)"
+          >
+            +
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            [disabled]="isLoading[product.id] || getProductQuantity(product.id) === 0"
+            (click)="removeProductFromUser(product)"
+          >
+            -
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
