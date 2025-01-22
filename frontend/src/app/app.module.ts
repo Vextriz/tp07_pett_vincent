@@ -6,14 +6,13 @@ import { AppComponent } from './app.component';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
-import { ShoppingBagComponent } from '../shopping-bag/shopping-bag.component';
-import { ProductFilterComponent } from '../product-filter/product-filter.component';
+import { ShoppingBagComponent } from '../product/shopping-bag/shopping-bag.component';
+import { ProductFilterComponent } from '../product/product-filter/product-filter.component';
 import { ShoppingBagState } from '../store/shopping-bag.state';
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingBagComponent,
-    ProductFilterComponent,
     ProductFilterComponent
   ],
   imports: [

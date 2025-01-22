@@ -1,22 +1,27 @@
-const { checkJwt}  = require('./jwtMiddleware.js');
+const { checkJwt } = require('./jwtMiddleware.js');
 
-module.exports = app => {
-    const utilisateur = require("../controllers/utilisateur.controllers.js");
+module.exports = (app) => {
+  const utilisateur = require("../controllers/utilisateur.controllers.js");
 
-    var router = require("express").Router();
+  if (!utilisateur) {
+    throw new Error("Le contrôleur utilisateur.controllers.js n'a pas été importé correctement.");
+  }
 
-    router.post("/:userId/produits", utilisateur.addProductsToUser);
+  const router = require("express").Router();
 
-    router.get("/:userId/produits", utilisateur.getUserProducts);
+  router.put("/:userId/produits", checkJwt, utilisateur.addProductToUser);
 
-    router.delete("/:userId/produits/:productId",utilisateur.removeProductFromUser);
+  router.get("/:userId/produits", checkJwt, utilisateur.getUserProducts);
 
-    router.post("/register", utilisateur.createUser);
+  router.delete("/:userId/produits/:productId", checkJwt, utilisateur.removeProductFromUser);
 
-    router.post("/login", utilisateur.login);
+  router.post("/register", utilisateur.createUser);
 
-    module.exports = router;
+  router.post("/login", utilisateur.login);
 
+  router.put("/:userId", checkJwt, utilisateur.updateUser);
 
-    app.use('/api/utilisateur', router);
-  };
+  router.delete("/:userId", checkJwt, utilisateur.deleteUser);
+
+  app.use('/api/utilisateur', router);
+};

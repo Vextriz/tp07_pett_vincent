@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { Produit } from '../models/produit';
-import { ApiService } from '../services/api.service';
-import { AuthService } from '../auth/auth.service';
-import { Utilisateur } from '../models/utilisateur';
+import { Produit } from '../../models/produit';
+import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../auth/auth.service';
+import { Utilisateur } from '../../models/utilisateur';
+import { CardsInputComponent } from '../../card/cards-input/cards-input.component';
+import { CardsListComponent } from '../../card/cards-list/cards-list.component';
 
 @Component({
   selector: 'app-shopping-bag',
   templateUrl: './shopping-bag.component.html',
   styleUrls: ['./shopping-bag.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CardsInputComponent, CardsListComponent],
 })
 export class ShoppingBagComponent implements OnInit {
   userProducts: Produit[] = []; // Liste des produits de l'utilisateur
@@ -30,6 +32,13 @@ export class ShoppingBagComponent implements OnInit {
 
     // Charger les produits utilisateur
     this.loadUserProducts();
+  }
+  title = 'cardsApp';
+
+  @ViewChild(CardsInputComponent) cardsInputComponent!: CardsInputComponent;
+
+  handleEditRequest(event: { index: number; card: { nom: string; codePan: string; ccv: string; mois: string; annee: string } }) {
+    this.cardsInputComponent.editCard(event.index, event.card);
   }
 
   // Charge les produits utilisateur depuis l'API
@@ -58,7 +67,7 @@ export class ShoppingBagComponent implements OnInit {
     if (!this.currentUtilisateur || this.isLoading[product.id]) return;
 
     this.isLoading[product.id] = true; // Active l'indicateur de chargement
-    this.apiService.addProductUser(this.currentUtilisateur.id, product).subscribe({
+    this.apiService.addProductUser(this.currentUtilisateur.id, product.id,product.quantite).subscribe({
       next: () => {
         const foundProduct = this.userProducts.find((p) => p.id === product.id);
         if (foundProduct) {
@@ -100,4 +109,6 @@ export class ShoppingBagComponent implements OnInit {
       },
     });
   }
+
+
 }

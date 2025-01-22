@@ -1,0 +1,13 @@
+<ul>
+  <li *ngFor="let card of cards(); let i = index">
+    <div class="card-info">
+      <span><strong>Nom :</strong> {{ card.nom }}</span>
+      <span><strong>Code :</strong> {{ card.codePan | caviarder }}</span>
+      <span><strong>Validité :</strong> {{ card.mois }}/{{ card.annee }}</span>
+    </div>
+    <div class="actions">
+      <button (click)="requestEdit(i, card)">Modifier</button>
+      <button class="btn-delete" (click)="deleteCard(i)">X</button>
+    </div>
+  </li>
+</ul>

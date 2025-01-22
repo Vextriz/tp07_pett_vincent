@@ -7,15 +7,21 @@
     <li class="nav-item" *ngIf="!isAuthenticated">
       <a class="nav-link" routerLink="/register">Inscription</a>
     </li>
-    <li class="nav-item" *ngIf="isAuthenticated">
-      <a class="nav-link" routerLink="/shoppingBag">Voir le Panier</a>
-    </li>
-    <li class="nav-item" *ngIf="isAuthenticated">
-      <a class="nav-link" routerLink="/products">Catalogue</a>
-    </li>
-    <li class="nav-item" *ngIf="isAuthenticated">
-      <a class="nav-link" (click)="logout()">Déconnexion</a>
-    </li>
+  <li class="nav-item" *ngIf="isAuthenticated">
+    <a class="nav-link" routerLink="/shoppingBag">Voir le Panier</a>
+  </li>
+  <li class="nav-item" *ngIf="isAuthenticated">
+    <a class="nav-link" routerLink="/products">Catalogue</a>
+  </li>
+  <li class="nav-item" *ngIf="isAuthenticated">
+    <a class="nav-link" routerLink="/update">Mise à jour</a>
+  </li>
+  <li class="nav-item" *ngIf="isAuthenticated">
+    <a class="nav-link" routerLink="/delete">Suppression</a>
+  </li>
+  <li class="nav-item" *ngIf="isAuthenticated">
+    <a class="nav-link" (click)="logout()">Déconnexion</a>
+  </li>
   </ul>
 </nav>
 

@@ -1,0 +1,50 @@
+<form [formGroup]="cardsForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="nom">Nom :</label>
+    <input id="nom" formControlName="nom" />
+    <ng-template [appFieldError]="cardsForm.get('nom')" [appFieldErrorMessage]="'Le nom est requis.'">
+      <small class="error">Le nom est requis.</small>
+    </ng-template>
+  </div>
+
+  <div class="form-group">
+    <label for="codePan">Code PAN :</label>
+    <input id="codePan" formControlName="codePan" />
+    <ng-template [appFieldError]="cardsForm.get('codePan')"
+      [appFieldErrorMessage]="'Code PAN invalide. Doit contenir 16 chiffres.'">
+      <small class="error">Code PAN invalide. Doit contenir 16 chiffres.</small>
+    </ng-template>
+  </div>
+
+  <div class="form-group">
+    <label for="ccv">CCV :</label>
+    <input id="ccv" formControlName="ccv" />
+    <ng-template [appFieldError]="cardsForm.get('ccv')"
+      [appFieldErrorMessage]="'CCV invalide. Doit contenir 3 chiffres.'">
+      <small class="error">CCV invalide. Doit contenir 3 chiffres.</small>
+    </ng-template>
+  </div>
+
+  <div class="form-group">
+    <label for="mois">Mois :</label>
+    <input id="mois" formControlName="mois" />
+    <ng-template [appFieldError]="cardsForm.get('mois')"
+      [appFieldErrorMessage]="'Mois invalide. Doit être entre 01 et 12.'">
+      <small class="error">Mois invalide. Doit être entre 01 et 12.</small>
+    </ng-template>
+  </div>
+
+  <div class="form-group">
+    <label for="annee">Année :</label>
+    <input id="annee" formControlName="annee" />
+    <ng-template [appFieldError]="cardsForm.get('annee')"
+      [appFieldErrorMessage]="'Année invalide. Doit contenir 4 chiffres.'">
+      <small class="error">Année invalide. Doit contenir 4 chiffres.</small>
+    </ng-template>
+  </div>
+
+  <button type="submit" [disabled]="cardsForm.invalid">
+    {{ editMode ? 'Modifier' : 'Ajouter' }}
+  </button>
+  <button type="button" *ngIf="editMode" (click)="cancelEdit()">Annuler</button>
+</form>

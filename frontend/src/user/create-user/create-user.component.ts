@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -29,7 +29,7 @@ export class CreateUserComponent {
     this.authService.createUser(newUser).subscribe(
       (response: any) => {
         alert('User created successfully!');
-        this.router.navigate(['/register']);
+        this.router.navigate(['/login']);
       },
       (error) => {
         alert('Error creating user!');
